@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Pink Party",
+    "desc": "Classic strawberry glaze with rainbow sprinkles.",
+    "price": "Rs.100",
+    "calories": "285 kcal",
+    "weight": "90g",
+    "image": "images/donuts/pink.png"
+  },
+  {
+    "name": "Caramel Crunch",
+    "desc": "Caramel glaze topped with golden toffee bits.",
+    "price": "Rs.150",
+    "calories": "320 kcal",
+    "weight": "95g",
+    "image": "images/donuts/caramel.png"
+  },
+  {
+    "name": "Maple Drizzle",
+    "desc": "Sweet maple glaze with vanilla drizzle.",
+    "price": "Rs.140",
+    "calories": "285 kcal",
+    "weight": "90g",
+    "image": "images/donuts/maple.png"
+  },
+  {
+    "name": "Nutty Delight",
+    "desc": "Chocolate glaze with crunchy roasted peanuts.",
+    "price": "Rs.120",
+    "calories": "360 kcal",
+    "weight": "100g",
+    "image": "images/donuts/nutty.png"
+  },
+  {
+    "name": "Blue Waves",
+    "desc": "Vanilla glaze topped with blue sprinkles.",
+    "price": "Rs.100",
+    "calories": "250 kcal",
+    "weight": "88g",
+    "image": "images/donuts/blue.png"
+  },
+  {
+    "name": "Cookie Crunch",
+    "desc": "Chocolate glaze covered with oreo crumbs.",
+    "price": "Rs.160",
+    "calories": "380 kcal",
+    "weight": "105g",
+    "image": "images/donuts/brown.png"
+  },
+  {
+    "name": "Cinnamon Swirl",
+    "desc": "Coated with cinnamon sugar for a warm cozy bite.",
+    "price": "Rs.120",
+    "calories": "270 kcal",
+    "weight": "85g",
+    "image": "images/donuts/dusty.png"
+  },
+  {
+    "name": "Vanilla Crackle",
+    "desc": "White chocolate glaze with caramel filling.",
+    "price": "Rs.110",
+    "calories": "300 kcal",
+    "weight": "98g",
+    "image": "images/donuts/white.png"
+  },
+  {
+    "name": "Matcha Magic",
+    "desc": "Green tea glaze with white chocolate drizzle.",
+    "price": "Rs.200",
+    "calories": "260 kcal",
+    "weight": "90g",
+    "image": "images/donuts/green.png"
+  },
+  {
+    "name": "Red Crush",
+    "desc": "Rich cream glaze with red velvet cake crumbs.",
+    "price": "Rs.190",
+    "calories": "340 kcal",
+    "weight": "100g",
+    "image": "images/donuts/red.png"
+  },
+  {
+    "name": "Sugar Puff",
+    "desc": "Soft donut dusted with powdered sugar and jam filling.",
+    "price": "Rs.110",
+    "calories": "240 kcal",
+    "weight": "82g",
+    "image": "images/donuts/powder.png"
+  },
+  {
+    "name": "Almond Joy",
+    "desc": "Honey glaze with toasted almond slices.",
+    "price": "Rs.170",
+    "calories": "330 kcal",
+    "weight": "96g",
+    "image": "images/donuts/yellow.png"
+  }
+]

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Bliss | Cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Inknut+Antiqua:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/icon.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fefcf7;
+      color: #4a4a4a;
+      line-height: 1.6;
+      font-family: "Inknut Antiqua", serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background: #f9dbe3;
+      border-bottom: 1px solid #e5b9c5;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .img-logo { width: 42px; height: 42px; }
+
+    .logo-text {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #c94682;
+      font-family: "Amarante";
+      -webkit-text-stroke: 0.5px #98535E;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #fff;
+      color: #c94682;
+      border-color: #e5b9c5;
+    }
+
+    .cart-page-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 50px;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+
+    .cart-title {
+      font-size: 2rem;
+      font-family: "Amarante";
+      color: #c94682;
+    }
+
+    .cart-item-count { font-weight: bold; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      margin-right: 20px;
+    }
+
+    .item-info { flex-grow: 1; }
+
+    .item-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .remove-item {
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #888;
+      transition: color 0.2s;
+    }
+
+    .remove-item:hover { color: #c94682; }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin: 0 20px;
+    }
+
+    .quantity-selector button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .quantity-selector span { padding: 0 10px; }
+
+    .item-price,
+    .item-total {
+      font-weight: bold;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .continue-shopping:hover { color: #c94682; }
+
+    .order-summary-panel {
+      background: #f9dbe3;
+      border: 1px solid #c94682;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .order-summary-panel h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 25px;
+      font-family: "Amarante";
+      color: #c94682;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 15px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .promo-code-section { margin: 30px 0; }
+
+    .promo-input-group {
+      display: flex;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .promo-input-group input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-right: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .promo-input-group button {
+      padding: 10px 20px;
+      border: none;
+      background: #e5b9c5;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .delivery-section select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+    }
+
+    .summary-divider {
+      border: 0;
+      border-top: 1px solid #e0e0e0;
+      margin: 25px 0;
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      background: #c94682;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f9dbe3;
+      color: #555;
+      border-top: 1px solid #e5b9c5;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="home.html"><img class="img-logo" src="images/icon.png" alt="Logo"></a>
+      <span class="logo-text">Sweet Bliss</span>
+    </div>
+    <nav>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="cart.html" class="active">Cart</a>
+      <a href="open.html">Profile</a>
+    </nav>
+  </header>
+
+  <main class="cart-page-container">
+    <section>
+      <div class="cart-header">
+        <h1 class="cart-title">CART</h1>
+        <span class="cart-item-count">3 Items</span>
+      </div>
+      <div class="cart-items"></div>
+      <a href="menu.html" class="continue-shopping">← Continue Shopping</a>
+    </section>
+
+    <aside class="order-summary-panel">
+      <h2>Order Summary</h2>
+
+      <div class="summary-line">
+        <span>ITEMS</span>
+        <span class="cart-item-count">3 Items</span>
+      </div>
+
+      <div class="promo-code-section">
+        <label for="promo-code">Promo Code</label>
+        <div class="promo-input-group">
+          <input type="text" id="promo-code" placeholder="Enter your code" />
+          <button id="apply-promo">APPLY</button>
+        </div>
+      </div>
+
+      <div class="delivery-section">
+        <label for="delivery-options">Delivery</label>
+        <select id="delivery-options">
+          <option value="100">Standard Delivery - Rs. 100</option>
+          <option value="180">Express Delivery - Rs. 180</option>
+          <option value="0">Store Pickup - Rs. 0</option>
+        </select>
+      </div>
+
+      <hr class="summary-divider" />
+
+      <div>
+        <div class="summary-line"><span>Subtotal</span><span id="subtotal">Rs.0</span></div>
+        <div class="summary-line"><span>Promo Code</span><span id="promo">Rs.0</span></div>
+        <div class="summary-line"><span>Delivery</span><span id="delivery">Rs.100</span></div>
+        <div class="summary-line final-total"><span>Total Cost</span><span id="total">Rs.0</span></div>
+      </div>
+
+      <button class="checkout-button">Checkout</button>
+    </aside>
+  </main>
+
+  <footer>© 2025 Sweet Bliss Bakery. All rights reserved.</footer>
+
+  <script>
+    class CartItem {
+      constructor(name, price, quantity, image) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+      }
+      get total() { return this.price * this.quantity; }
+      increase() { this.quantity++; }
+      decrease() { if (this.quantity > 1) this.quantity--; }
+    }
+
+    class Cart {
+      constructor(items = []) {
+        this.items = items.map(i => new CartItem(i.name, i.price, i.quantity, i.image));
+        this.promoDiscount = 0;
+        this.deliveryCharge = 100;
+      }
+
+      render() {
+        const container = document.querySelector(".cart-items");
+        container.innerHTML = "";
+
+        this.items.forEach((item, i) => {
+          const div = document.createElement("div");
+          div.className = "cart-item";
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-info">
+              <h3>${item.name}</h3>
+              <span class="remove-item" title="Remove Item">×</span>
+            </div>
+            <div class="quantity-selector">
+              <button class="decrease">-</button>
+              <span>${item.quantity}</span>
+              <button class="increase">+</button>
+            </div>
+            <div class="item-price">Rs.${item.price}</div>
+            <div class="item-total">Rs.${item.total}</div>`;
+          container.appendChild(div);
+        });
+
+        container.querySelectorAll(".increase").forEach((btn, i) =>
+          btn.addEventListener("click", () => { this.items[i].increase(); this.render(); })
+        );
+        container.querySelectorAll(".decrease").forEach((btn, i) =>
+          btn.addEventListener("click", () => { this.items[i].decrease(); this.render(); })
+        );
+        container.querySelectorAll(".remove-item").forEach((btn, i) =>
+          btn.addEventListener("click", () => this.removeItem(i))
+        );
+
+        this.updateSummary();
+      }
+
+      removeItem(i) {
+        this.items.splice(i, 1);
+        this.render();
+      }
+
+      get subtotal() {
+        return this.items.reduce((sum, item) => sum + item.total, 0);
+      }
+
+      applyPromo(code) {
+        this.promoDiscount = code === "sweet50" ? 50 : 0;
+        this.updateSummary();
+      }
+
+      updateSummary() {
+        document.querySelectorAll(".cart-item-count").forEach(el =>
+          el.textContent = `${this.items.length} Items`
+        );
+        document.getElementById("subtotal").textContent = "Rs." + this.subtotal;
+        document.getElementById("promo").textContent = "Rs." + this.promoDiscount;
+        document.getElementById("delivery").textContent = "Rs." + this.deliveryCharge;
+        document.getElementById("total").textContent =
+          "Rs." + (this.subtotal - this.promoDiscount + this.deliveryCharge);
+      }
+    }
+
+    fetch("cartData.json")
+      .then(res => res.json())
+      .then(data => {
+        const cart = new Cart(data);
+        cart.render();
+
+        document.getElementById("apply-promo").addEventListener("click", () =>
+          cart.applyPromo(document.getElementById("promo-code").value)
+        );
+
+        document.getElementById("delivery-options").addEventListener("change", e => {
+          cart.deliveryCharge = Number(e.target.value);
+          cart.updateSummary();
+        });
+      })
+  </script>
+</body>
+</html> 

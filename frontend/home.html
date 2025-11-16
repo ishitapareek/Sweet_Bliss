@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Bliss | Homepage</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/icon.png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Inknut Antiqua", serif; overflow-x: hidden; background: #fff; }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 40px; background: #f9dbe3; border-bottom: 1px solid #e5b9c5;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .img-logo { width: 42px; height: 42px; }
+
+    .logo-text {
+      font-size: 1.7rem; font-weight: bold; color: #c94682; font-family: "Amarante";
+      -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #98535E;
+    }
+
+    nav { display: flex; align-items: center; gap: 12px; }
+    nav a {
+      text-decoration: none; color: #333; font-family: "Inknut Antiqua"; font-size: 13px;
+      padding: 6px 10px; border-radius: 6px; transition: 0.2s; border: 1px solid transparent;
+    }
+    nav a:hover { background: #fff; color: #c94682; border-color: #e5b9c5; }
+
+    main { display: flex; flex-direction: row; }
+
+    .left-section {
+      flex: 1.5; padding: 60px;
+      background: linear-gradient(252deg, #fbdde0 10%, #ffd5e1 30%, #ffe6eb 50%, #fff2f6 75%, #fff9f9 95%);
+      display: flex; flex-direction: column; gap: 18px; border-bottom: 1.5px solid #000;
+    }
+
+    .store-name {
+      font-family: "Amarante"; font-size: 100px; color: #d36ca2;
+      -webkit-text-stroke-width: 0.1px; -webkit-text-stroke-color: #98535E;
+    }
+    .store-desc { font-size: 17.5px; color: #222; line-height: 1.7; max-width: 700px; }
+
+    .menu-btn {
+      align-self: flex-start; margin-top: 5px; padding: 4px 50px;
+      background: white; border: 1px solid black; font-size: 15px; font-family: "Inknut Antiqua";
+      cursor: pointer; box-shadow: 4px 4px 0px #f9dbe3, 4px 4px 0px 1px #000; transition: 0.2s;
+    }
+    .menu-btn:hover { transform: scale(1.1); }
+
+    .right-section {
+      flex: 1; background: #fef2f5;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 40px; border-bottom: 1.5px solid #000;
+    }
+
+    .specials-heading { font-size: 40px; color: #c94682; font-family: "Amarante"; letter-spacing: 7px; font-weight: 600; }
+    .specials-tagline { font-size: 13px; margin-bottom: 30px; color: #8a5a68; font-style: italic; opacity: 0.8; }
+
+    .carousel { text-align: center; position: relative; padding: 30px 40px; border-radius: 20px; }
+    input[type="radio"] { display: none; }
+    .slides { position: relative; }
+
+    .slide { display: none; flex-direction: column; align-items: center; cursor: pointer; }
+    .slide img {
+      width: 250px; border: 1px solid #fef2f5; transition: transform 0.3s ease;
+      padding: 12px; box-shadow: 0 0 30px 5px rgba(201,70,130,0.2); border-radius: 50%;
+    }
+    .slide img:hover { transform: scale(1.05); }
+
+    .slide h3 { margin-top: 20px; color: #98535e; font-size: 20px; }
+
+    #slide1:checked ~ .slides .slide:nth-child(1),
+    #slide2:checked ~ .slides .slide:nth-child(2),
+    #slide3:checked ~ .slides .slide:nth-child(3) { display: flex; }
+
+    .prev, .next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      font-size: 24px; font-weight: bold; cursor: pointer;
+      width: 50px; height: 50px; background: transparent; color: rgba(201,70,130,0.9);
+      border-radius: 50px; transition: 0.3s; display: flex; justify-content: center; align-items: center;
+    }
+    .prev:hover, .next:hover { background: rgba(201,70,130,0.1); color: #c94682; }
+    .prev { left: -60px; } .next { right: -60px; }
+
+    .hidden-menu { display: none; } .show-menu { display: block; }
+
+    .menu-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      background-color: #fef2f5; padding: 30px 40px;
+    }
+
+    .title-block h1 {
+      color: #d36ca2; text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+      font-family: "Amarante"; font-size: 78px;
+      -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #98535E;
+    }
+
+    .see-all {
+      color: #000; text-decoration: underline; font-size: 15px; margin-top: 20px; display: inline-block;
+    }
+
+    .menu-grid {
+      max-width: 1200px; margin: 40px auto; padding: 0 20px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px;
+    }
+
+    .menu-item {
+      background: #fff; border: 1px solid #eee; border-radius: 12px;
+      padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s; cursor: pointer;
+    }
+    .menu-item:hover { transform: translateY(-4px); }
+
+    .menu-item img {
+      width: 140px; height: 140px; object-fit: cover; border-radius: 50%;
+    }
+    .menu-item h3 { margin-top: 15px; font-size: 1.3rem; color: #c94682; font-family: 'Amarante', cursive; }
+    .menu-item p { font-size: 0.7rem; margin: 10px 0; color: #555; }
+    .price { display: block; margin-top: 8px; font-weight: bold; color: #333; font-size: 12px; }
+    .add-btn {
+      margin-top: 12px; padding: 8px 16px; background: #c94682; color: #fff;
+      border: none; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 12px;
+    }
+    .add-btn:hover { background: #a8366a; }
+
+    .popup-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none; justify-content: center; align-items: center;
+      z-index: 1000;
+    }
+    .popup-card {
+      background: #fff; padding: 25px 30px; border-radius: 12px; width: 300px;
+      text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); position: relative;
+    }
+    .popup-card h3 { font-family: "Amarante"; color: #c94682; margin-bottom: 10px; }
+    .popup-card p { font-size: 13px; color: #444; margin-bottom: 6px; }
+    .close-popup {
+      position: absolute; top: 8px; right: 10px; cursor: pointer; font-size: 18px; color: #c94682; font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img class="img-logo" src="images/icon.png" alt="Logo">
+      <span class="logo-text">Sweet Bliss</span>
+    </div>
+    <nav>
+      <a href="menu.html">Menu</a><a href="about.html">About Us</a><a href="cart.html">Cart</a><a href="open.html">Profile</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="left-section">
+      <h1 class="store-name">SWEET BLISS</h1>
+      <p class="store-desc">
+        Where freshness meets funk! Every donut is handmade daily, fluffy on the inside,
+        and glazed with bold, tasty flavors that keep things exciting.
+      </p>
+      <button class="menu-btn" id="menuBtn">MENU</button>
+    </section>
+
+    <section class="right-section">
+      <h2 class="specials-heading">SEASONAL SPECIALS</h2>
+      <div class="carousel">
+        <input type="radio" name="slides" id="slide1" checked>
+        <input type="radio" name="slides" id="slide2">
+        <input type="radio" name="slides" id="slide3">
+        <div class="slides">
+          <div class="slide" data-name="Caramel Crunch" data-desc="Rich caramel glaze with golden toffee bits." data-cal="320 kcal" data-weight="95g">
+            <label for="slide3" class="prev">&#8592;</label>
+            <img src="images/donuts/caramel.png" alt="Caramel Crunch">
+            <label for="slide2" class="next">&#8594;</label>
+            <h3>Caramel Crunch</h3>
+          </div>
+          <div class="slide" data-name="Maple Drizzle" data-desc="Soft donut topped with maple glaze." data-cal="285 kcal" data-weight="90g">
+            <label for="slide1" class="prev">&#8592;</label>
+            <img src="images/donuts/maple.png" alt="Maple Drizzle">
+            <label for="slide3" class="next">&#8594;</label>
+            <h3>Maple Drizzle</h3>
+          </div>
+          <div class="slide" data-name="Nutty Delight" data-desc="Chocolate donut with roasted peanuts." data-cal="360 kcal" data-weight="100g">
+            <label for="slide2" class="prev">&#8592;</label>
+            <img src="images/donuts/nutty.png" alt="Nutty Delight">
+            <label for="slide1" class="next">&#8594;</label>
+            <h3>Nutty Delight</h3>
+          </div>
+        </div>
+      </div>
+      <p class="specials-tagline">Only available for a limited time</p>
+    </section>
+  </main>
+
+  <section id="miniMenu" class="hidden-menu">
+    <header class="menu-header">
+      <div class="title-block">
+        <h1>MENU</h1>
+        <p class="menu-subtitle">Handmade fresh daily, glazed with love</p>
+      </div>
+      <div class="header-right">
+        <a href="menu.html" class="see-all">SEE ALL</a>
+      </div>
+    </header>
+
+    <section class="menu-grid">
+      <div class="menu-item" data-name="Pink Party" data-desc="Strawberry glaze with rainbow sprinkles." data-cal="280 kcal" data-weight="85g">
+        <img src="images/donuts/pink.png" alt="Pink Party"><h3>Pink Party</h3><p>Classic strawberry glaze with rainbow sprinkles.</p><span class="price">Rs.100</span><button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-name="Caramel Crunch" data-desc="Caramel glaze topped with toffee bits." data-cal="320 kcal" data-weight="95g">
+        <img src="images/donuts/caramel.png" alt="Caramel Crunch"><h3>Caramel Crunch</h3><p>Caramel glaze topped with golden toffee bits.</p><span class="price">Rs.150</span><button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-name="Maple Drizzle" data-desc="Sweet maple glaze with vanilla drizzle." data-cal="285 kcal" data-weight="90g">
+        <img src="images/donuts/maple.png" alt="Maple Drizzle"><h3>Maple Drizzle</h3><p>Sweet maple glaze with vanilla drizzle.</p><span class="price">Rs.140</span><button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-name="Nutty Delight" data-desc="Chocolate glaze with roasted peanuts." data-cal="360 kcal" data-weight="100g">
+        <img src="images/donuts/nutty.png" alt="Nutty Delight"><h3>Nutty Delight</h3><p>Chocolate glaze with crunchy roasted peanuts.</p><span class="price">Rs.120</span><button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="menu-item" data-name="Blue Waves" data-desc="Vanilla glaze with blue sprinkles." data-cal="250 kcal" data-weight="88g">
+        <img src="images/donuts/blue.png" alt="Blue Waves"><h3>Blue Waves</h3><p>Vanilla glaze topped with blue sprinkles.</p><span class="price">Rs.100</span><button class="add-btn">Add to Cart</button>
+      </div>
+    </section>
+  </section>
+
+  <div class="popup-overlay" id="popup">
+    <div class="popup-card">
+      <span class="close-popup" id="closePopup">&times;</span>
+      <h3 id="popupTitle"></h3><p id="popupDesc"></p><p id="popupCal"></p><p id="popupWeight"></p>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="cartPopup" style="display:none;">
+    <div class="popup-card" style="text-align:center;">
+      <p style="font-size:16px;">Added to cart!</p>
+    </div>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const miniMenu = document.getElementById('miniMenu');
+    const popup = document.getElementById('popup');
+    const closePopup = document.getElementById('closePopup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupDesc = document.getElementById('popupDesc');
+    const popupCal = document.getElementById('popupCal');
+    const popupWeight = document.getElementById('popupWeight');
+    const cartPopup = document.getElementById('cartPopup');
+
+    menuBtn.onclick = () => {
+      const show = miniMenu.classList.toggle('show-menu');
+      menuBtn.textContent = show ? 'CLOSE MENU' : 'MENU';
+    };
+
+    function openPopup(data) {
+      popupTitle.textContent = data.name;
+      popupDesc.textContent = data.desc;
+      popupCal.textContent = 'Calories: ' + data.cal;
+      popupWeight.textContent = 'Weight: ' + data.weight;
+      popup.style.display = 'flex';
+    }
+
+    closePopup.onclick = () => popup.style.display = 'none';
+    popup.onclick = e => { if (e.target === popup) popup.style.display = 'none'; };
+
+    function showCartPopup() {
+      cartPopup.style.display = 'flex';
+      setTimeout(() => { cartPopup.style.display = 'none'; }, 1000);
+    }
+
+    document.querySelectorAll('.slide, .menu-item').forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target.classList.contains('add-btn')) {
+          e.stopPropagation();
+          showCartPopup();
+        } else openPopup(el.dataset);
+      });
+    });
+  </script>
+</body>
+</html>

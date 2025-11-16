@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sweet Bliss | Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Inknut+Antiqua&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/icon.png">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="home.html"><img class="img-logo" src="images/icon.png" alt="Logo"></a>
+      <span class="logo-text">Sweet Bliss</span>
+    </div>
+
+    <nav>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="cart.html">Cart</a>
+      <a href="open.html">Profile</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Our Menu</h1>
+    <p>Handmade fresh daily, glazed with love</p>
+  </section>
+
+  <section class="menu-grid" id="menuGrid"></section>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">×</span>
+      <h2 id="popup-title"></h2>
+      <p id="popup-desc"></p>
+      <p id="popup-cal"></p>
+      <p id="popup-weight"></p>
+    </div>
+  </div>
+
+  <div id="cart-popup" class="popup" style="display:none; align-items:center; justify-content:center;">
+    <div class="popup-content" style="text-align:center;">
+      <p>Added to cart!</p>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Sweet Bliss Bakery. All rights reserved.
+  </footer>
+
+  <script>
+    // shared cart
+    // window.cart = window.cart || [];
+
+    const grid = document.getElementById("menuGrid");
+
+    fetch("products.json")
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "menu-item";
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <span class="price">${item.price}</span>
+            <button class="add-btn">Add to Cart</button>
+          `;
+          div.querySelector(".add-btn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            addToCart(item);
+          });
+          div.addEventListener("click", () => {
+            showPopup(item.name, item.desc, item.calories, item.weight);
+          });
+          grid.appendChild(div);
+        });
+      })  
+      
+    function addToCart(item) {
+      // const existing = window.cart.find(p => p.name === item.name);
+      // if (existing) existing.quantity++;
+      // else window.cart.push({ ...item, quantity: 1 });
+      showCartPopup();
+    }
+
+    function showCartPopup() {
+      const popup = document.getElementById("cart-popup");
+      popup.style.display = "flex";
+      setTimeout(() => popup.style.display = "none", 1000);
+    }
+
+    function showPopup(name, desc, cal, weight) {
+      document.getElementById("popup-title").innerText = name;
+      document.getElementById("popup-desc").innerText = desc;
+      document.getElementById("popup-cal").innerText = "Calories: " + cal;
+      document.getElementById("popup-weight").innerText = "Weight: " + weight;
+      document.getElementById("popup").style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    // window.addEventListener("click", e => {
+    //   if (e.target === document.getElementById("popup")) closePopup();
+    // });
+
+    // window.addEventListener("keydown", e => {
+    //   if (e.key === "Escape") closePopup();
+    // });
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sweet Bliss</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Libertinus+Keyboard&family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images/icon.png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Amarante', serif;
+      background: linear-gradient(135deg, #f9dbe3 0%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      background-color: #f9dbe3;
+    }
+
+    .welcome-container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-container {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .logo-circle {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #e6abca 0%, #d44da5 100%);
+      border-radius: 50%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid #cf12a6;
+      box-shadow: 0 8px 25px rgba(241, 141, 193, 0.76);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donut {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #F4A460 0%, #DEB887 50%, #D2691E 100%);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .donut::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background: #8B4513;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.3);
+    }
+
+    .donut::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 20%;
+      width: 8px;
+      height: 3px;
+      background: #FF69B4;
+      border-radius: 2px;
+      box-shadow: 
+        12px 5px 0 #98FB98,
+        -3px 15px 0 #FFD700,
+        20px -2px 0 #FF6347,
+        8px 18px 0 #87CEEB,
+        25px 12px 0 #DDA0DD;
+    }
+
+    .welcome-title {
+      font-family: 'Amarante', cursive;
+      font-size: 2.5rem;
+      color: #2D1810;
+      margin-bottom: 40px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #ce4892 0%, #e034ce 100%);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(45, 24, 16, 0.3);
+      transition: 0.3s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(45, 24, 16, 0.4);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="welcome-container">
+    <div class="logo-circle">
+      <div class="donut"></div>
+    </div>
+
+    <h1 class="welcome-title">WELCOME TO SWEET BLISS</h1>
+
+    <a class="cta" href="auth.html">LOGIN OR SIGN UP</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const confettiPieces = [];
+    const colors = ['#ff5f9e', '#ffdd57', '#5fddff', '#8aff8a', '#d07fff', '#ffa07a', '#ff69b4'];
+
+    function createConfetti(count = 300) {
+      for (let i = 0; i < count; i++) {
+        confettiPieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          w: Math.random() * 10 + 4,
+          h: Math.random() * 6 + 3,   
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 3 + 2,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettiPieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+
+        p.y += p.speed;
+        p.rotation += p.rotationSpeed;
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    function animateConfetti() {
+      drawConfetti();
+      requestAnimationFrame(animateConfetti);
+    }
+
+    window.onload = () => {
+      createConfetti(175);  
+      animateConfetti();
+    };
+  </script>
+</body>
+</html>
