@@ -1,0 +1,19 @@
+<header>
+  <div class="logo">
+    <a href="/"><img class="img-logo" src="/images/icon.png" alt="Logo" /></a>
+    <span class="logo-text">Sweet Bliss</span>
+  </div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/about">About Us</a>
+    <a href="/cart">Cart</a>
+
+    <% if (currentUser) { %>
+      <a href="/">Hi, <%= currentUser.name %></a>
+    <% } else { %>
+      <a href="/auth">Login</a>
+    <% } %>
+  </nav>
+</header>

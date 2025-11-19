@@ -1,0 +1,20 @@
+[
+  {
+    "name": "RED CRUSH",
+    "price": 190,
+    "quantity": 4,
+    "image": "images/donuts/red.png"
+  },
+  {
+    "name": "MAPLE DRIZZLE",
+    "price": 140,
+    "quantity": 6,
+    "image": "images/donuts/maple.png"
+  },
+  {
+    "name": "VANILLA CRACKLE",
+    "price": 110,
+    "quantity": 3,
+    "image": "images/donuts/white.png"
+  }
+]

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Bliss | Login / Sign Up</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/png" href="images/icon.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background:#fff; color:#333; line-height:1.6; }
+
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 40px; background:#f9dbe3; border-bottom:1px solid #e5b9c5;
+    }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .img-logo { width:42px; height:42px; }
+    .logo-text {
+      font-size:1.7rem; font-weight:bold; color:#c94682;
+      font-family:"Amarante"; -webkit-text-stroke:0.5px #98535E;
+    }
+    nav { display:flex; gap:12px; }
+    nav a {
+      text-decoration:none; font-family:"Inknut Antiqua"; font-size:13px;
+      padding:6px 10px; border-radius:6px; border:1px solid transparent;
+      color:#333; transition:0.2s ease;
+    }
+    nav a:hover { background:#fff; color:#c94682; border-color:#e5b9c5; }
+
+    .main-container {
+      min-height:calc(100vh - 120px);
+      display:flex; justify-content:center; align-items:center;
+      padding:40px 20px; background:#fef2f5;
+    }
+
+    .auth-container {
+      display:grid; grid-template-columns:1fr 1fr;
+      max-width:800px; width:100%;
+      background:#fff; border-radius:16px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.08);
+      overflow:hidden;
+    }
+
+    .brand-panel {
+      background:linear-gradient(135deg,#c94682,#d163a4);
+      padding:60px 40px;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      color:white; text-align:center;
+    }
+    .brand-logo {
+      width:100px; height:100px; background:#fff;
+      border-radius:50%; display:flex; align-items:center;
+      justify-content:center; margin-bottom:30px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    }
+    .donut-icon {
+      width:70px; height:70px;
+      background:linear-gradient(45deg,#d2691e,#f4a460,#deb887);
+      border-radius:50%; position:relative;
+    }
+    .donut-icon::before {
+      content:""; width:25px; height:25px; background:#fff;
+      border-radius:50%; position:absolute; top:22px; left:22px;
+    }
+    .donut-icon::after {
+      content:""; position:absolute; top:15%; left:25%;
+      width:4px; height:2px; background:#ff69b4;
+      border-radius:1px;
+      box-shadow:8px 5px 0 #98fb98, -2px 12px 0 #ffd700, 12px -2px 0 #ff6347;
+    }
+    .brand-title {
+      font-family:"Amarante"; font-size:2.5rem; margin-bottom:10px;
+    }
+    .brand-tagline {
+      font-family:"Inknut Antiqua"; font-size:0.9rem; opacity:0.9;
+    }
+
+    .form-panel { padding:50px 40px; }
+
+    .form-tabs {
+      display:flex; background:#f9dbe3; border-radius:8px;
+      padding:4px; margin-bottom:30px;
+    }
+    .tab-button {
+      flex:1; padding:12px; border:none; background:none;
+      font-weight:600; cursor:pointer; transition:0.2s;
+      text-transform:uppercase; font-size:0.9rem;
+      color:#666; border-radius:6px;
+    }
+    .tab-button.active {
+      background:#c94682; color:#fff;
+      box-shadow:0 2px 8px rgba(201,70,130,0.3);
+    }
+
+    .form-label { font-size:0.85rem; margin-bottom:5px; font-weight:600; }
+    .form-input {
+      width:100%; padding:12px 16px; border:1px solid #e5b9c5;
+      border-radius:8px; background:#fafafa;
+      transition:0.3s; margin-bottom:20px;
+    }
+    .form-input:focus {
+      background:#fff; border-color:#c94682;
+      box-shadow:0 0 0 3px rgba(201,70,130,0.15);
+      outline:none;
+    }
+
+    .submit-button {
+      width:100%; padding:14px; color:#fff; background:#c94682;
+      border:none; border-radius:8px; font-size:1rem;
+      font-weight:600; cursor:pointer; transition:0.2s;
+      text-transform:uppercase;
+    }
+    .submit-button:hover { background:#a63973; }
+
+    .hidden { display:none; }
+
+    footer {
+      text-align:center; padding:20px; margin-top:40px;
+      background:#f9dbe3; border-top:1px solid #e5b9c5;
+    }
+    /* 🌸 Pink popup message (same style as home, cart, menu) */
+.popup {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: #c94682;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 2000;
+  font-family: "Inknut Antiqua", serif;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.popup.hidden {
+  opacity: 0;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <%- include('partials/header') %>
+
+  <div class="main-container">
+    <div class="auth-container">
+
+      <div class="brand-panel">
+        <div class="brand-logo"><div class="donut-icon"></div></div>
+        <h2 class="brand-title">SWEET BLISS</h2>
+        <p class="brand-tagline">Indulge in handcrafted donuts made fresh daily</p>
+      </div>
+
+      <div class="form-panel">
+
+        <div class="form-tabs">
+          <button id="loginTab" class="tab-button active">Login</button>
+          <button id="signupTab" class="tab-button">Sign Up</button>
+        </div>
+
+        <form id="loginForm">
+          <label class="form-label">Email Address</label>
+          <input id="loginEmail" class="form-input" type="email" required />
+
+          <label class="form-label">Password</label>
+          <input id="loginPassword" class="form-input" type="password" required />
+
+          <button type="submit" class="submit-button">Welcome Back</button>
+        </form>
+
+        <form id="signupForm" class="hidden">
+          <label class="form-label">Full Name</label>
+          <input id="signupName" class="form-input" type="text" required />
+
+          <label class="form-label">Email Address</label>
+          <input id="signupEmail" class="form-input" type="email" required />
+
+          <label class="form-label">Password</label>
+          <input id="signupPassword" class="form-input" type="password" required />
+
+          <label class="form-label">Confirm Password</label>
+          <input id="confirmPassword" class="form-input" type="password" required />
+
+          <button type="submit" class="submit-button">Join Sweet Bliss</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+
+<div id="authPopup" class="popup hidden">
+  <p id="authPopupText"></p>
+</div>
+
+<script>
+  function showAuthPopup(message) {
+  const popup = document.getElementById("authPopup");
+  const text = document.getElementById("authPopupText");
+
+  text.textContent = message;
+
+  popup.classList.remove("hidden");
+  popup.classList.add("show");
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+    popup.classList.add("hidden");
+  }, 1500);
+}
+
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+
+  loginTab.addEventListener("click", () => {
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+    loginForm.classList.remove("hidden");
+    signupForm.classList.add("hidden");
+  });
+
+  signupTab.addEventListener("click", () => {
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
+    signupForm.classList.remove("hidden");
+    loginForm.classList.add("hidden");
+  });
+
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+
+    const res = await fetch("/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    if (data.success) window.location.href = "/";
+else showAuthPopup(data.message || "Login failed");
+  });
+
+  document.getElementById("signupForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = signupName.value.trim();
+  const email = signupEmail.value.trim();
+  const password = signupPassword.value.trim();
+  const confirm = confirmPassword.value.trim();
+
+if (password !== confirm) {
+  showAuthPopup("Passwords do not match!");
+  return;
+}
+
+  const res = await fetch("/auth/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password })
+  });
+
+  const data = await res.json();
+  if (data.success) window.location.href = "/";
+else showAuthPopup(data.message || "Signup failed");
+  });
+</script>
+
+</body>
+</html>
