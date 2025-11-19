@@ -127,10 +127,10 @@ app.post("/auth/login", async (req, res) => {
 });
 
 // Logout
-app.post("/auth/logout", (req, res) => {
-  req.session.destroy();
-  res.json({ success: true });
-});
+// app.post("/auth/logout", (req, res) => {
+//   req.session.destroy();
+//   res.json({ success: true });
+// });
 
 // ===================== CART API =====================
 
