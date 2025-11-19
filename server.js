@@ -132,7 +132,7 @@ app.post("/auth/login", async (req, res) => {
 //   res.json({ success: true });
 // });
 
-// ===================== CART API =====================
+// CART API 
 
 // Get user's cart
 app.get("/api/cart", async (req, res) => {
@@ -236,7 +236,7 @@ app.delete("/api/cart", async (req, res) => {
   res.json({ success: true });
 });
 
-// ---------------- SERVER LISTEN ----------------
+// SERVER LISTEN 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server running on http://localhost:" + (process.env.PORT || 3000));
 });
