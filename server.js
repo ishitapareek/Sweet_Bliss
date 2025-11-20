@@ -42,47 +42,49 @@ async function connectDB() {
     console.error("MongoDB Connection Error:", err);
   }
 }
+
 connectDB();
 
-// ===================== MIDDLEWARE: PASS USER TO VIEWS =====================
+// MIDDLEWARE: PASS USER TO VIEWS 
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.user || null;
   next();
 });
 
-// =========================== ROUTES ===============================
+// ROUTES 
 
-// ---------- Home ----------
+// Home 
 app.get("/", (req, res) => {
   res.render("home", { title: "Sweet Bliss – Home" });
 });
 
-// ---------- Menu ----------
+// Menu 
 app.get("/menu", (req, res) => {
   res.render("menu", { title: "Menu" });
 });
 
-// ---------- About ----------
+// About 
 app.get("/about", (req, res) => {
   res.render("about", { title: "About Us" });
 });
 
-// ---------- Auth ----------
+// Auth 
 app.get("/auth", (req, res) => {
   res.render("auth", { title: "Login | Signup" });
 });
 
-// ---------- Cart ----------
+// Cart 
 app.get("/cart", (req, res) => {
   res.render("cart", { title: "Cart | Shop" });
 });
-// ---------- Profile ----------
+
+// Profile 
 app.get("/profile", (req, res) => {
   if (!req.session.user) return res.redirect("/auth");
   res.render("profile", { title: "Your Profile" });
 });
 
-// ============= AUTH API =============
+// AUTH API 
 
 // Signup
 app.post("/auth/signup", async (req, res) => {
@@ -125,12 +127,6 @@ app.post("/auth/login", async (req, res) => {
 
   res.json({ success: true });
 });
-
-// Logout
-// app.post("/auth/logout", (req, res) => {
-//   req.session.destroy();
-//   res.json({ success: true });
-// });
 
 // CART API 
 

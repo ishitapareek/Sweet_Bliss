@@ -539,6 +539,7 @@
 
     return res.json();
   })
+
   .then((items) => {
     const cart = new Cart(items);
     cart.render();
@@ -559,9 +560,10 @@
   setTimeout(() => {
     fetch("/api/cart", { method: "DELETE" })
       .then(() => location.reload());
-  }, 1500);
-});
+    }, 1500);
+  });
 
   })
+  
   .catch((err) => console.error("Error loading cart:", err));
 </script>
